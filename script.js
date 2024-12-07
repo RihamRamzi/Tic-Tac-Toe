@@ -17,19 +17,33 @@ console.log(gameBoard.board);
 const playGame = function () {
   const players = [
     {
-      player1: "player1",
+      name: "player1",
       symbol: "X",
     },
     {
-      player2: "player2",
+      name: "player2",
       symbol: "O",
     },
   ];
 
-  const activePlayer = console.log(players[1].symbol);
+  let activePlayer = players[0];
+  console.log(`${activePlayer.name}'s turn`);
+  console.log(gameBoard.board);
+  console.log(activePlayer.symbol);
 
-  const displayBoard = gameBoard.board;
+  const switchPlayer = function () {
+    activePlayer === players[0]
+      ? (activePlayer = players[1])
+      : (activePlayer = players[0]);
+  };
 
-  gameBoard.placeSymbol(1, 1, "X");
-  console.log(displayBoard);
+  return { switchPlayer, activePlayer };
 };
+
+console.log(playGame().activePlayer.symbol);
+
+const gameController = function (
+  row,
+  col,
+  symbol = playGame.activePlayer.symbol
+) {};
