@@ -1,17 +1,25 @@
 const gameBoard = (function () {
   const board = [
-    ["", "", ""],
-    ["", "", ""],
-    ["", "", ""],
+    ["X", "X", "X"],
+    ["X", "X", "X"],
+    ["X", "X", ""],
   ];
 
   const displayBoard = () => board;
+
+  // const cellCheck = function () {
+  //   board.forEach((row) =>
+  //     row.forEach((col) =>
+  //       col !== "" ? console.log(`draw`) : console.log(`test`)
+  //     )
+  //   );
+  // };
 
   const placeSymbol = function (row, col, symbol) {
     board[row][col] = symbol;
   };
 
-  return { placeSymbol, displayBoard };
+  return { placeSymbol, displayBoard, board };
 })();
 
 const gameController = function () {
@@ -37,9 +45,14 @@ const gameController = function () {
   };
 
   const play = function (row, col, symbol = activePlayer.symbol) {
-    gameBoard.placeSymbol(row, col, symbol);
-    switchPlayer();
-    printRound();
+    if (gameBoard.board[row][col] === "") {
+      gameBoard.placeSymbol(row, col, symbol);
+      switchPlayer();
+      printRound();
+    } else {
+      console.log(`Slot taken`);
+      printRound();
+    }
   };
   printRound();
 
