@@ -7,14 +7,6 @@ const gameBoard = (function () {
 
   const displayBoard = () => board;
 
-  // const cellCheck = function () {
-  //   board.forEach((row) =>
-  //     row.forEach((col) =>
-  //       col !== "" ? console.log(`draw`) : console.log(`test`)
-  //     )
-  //   );
-  // };
-
   const placeSymbol = function (row, col, symbol) {
     board[row][col] = symbol;
   };
@@ -44,7 +36,10 @@ const gameController = function () {
     console.log(gameBoard.displayBoard());
   };
 
+  let isFilled = false;
+
   const play = function (row, col, symbol = activePlayer.symbol) {
+    //checks is cell is empty to place symbol
     if (gameBoard.board[row][col] === "") {
       gameBoard.placeSymbol(row, col, symbol);
       switchPlayer();
@@ -52,6 +47,23 @@ const gameController = function () {
     } else {
       console.log(`Slot taken`);
       printRound();
+    }
+    drawCheck();
+  };
+
+  const drawCheck = function () {
+    gameBoard.board.forEach((row) =>
+      row.forEach((col) => {
+        if (col === "") {
+          isFilled = false;
+        } else {
+          isFilled = true;
+        }
+      })
+    );
+
+    if (isFilled === true) {
+      console.log(`Draw`);
     }
   };
   printRound();
