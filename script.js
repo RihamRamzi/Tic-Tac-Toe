@@ -1,8 +1,8 @@
 const gameBoard = (function () {
   const board = [
-    ["", "", "X"],
     ["", "", ""],
-    ["X", "", ""],
+    ["", "", ""],
+    ["", "", ""],
   ];
 
   const displayBoard = () => board;
@@ -31,12 +31,13 @@ const gameController = function () {
     activePlayer = activePlayer === players[0] ? players[1] : players[0];
   };
 
+  const getActivePlayer = () => activePlayer;
+
   const printRound = function () {
     console.log(`${activePlayer.name}'s turn`);
     console.log(gameBoard.displayBoard());
   };
 
-  let isFilled = false;
   let win = false;
 
   const play = function (row, col, symbol = activePlayer.symbol) {
@@ -59,17 +60,17 @@ const gameController = function () {
   };
 
   const drawCheck = function () {
-    gameBoard.board.forEach((row) =>
-      row.forEach((col) => {
-        if (col === "") {
-          isFilled = false;
-        } else {
-          isFilled = true;
-        }
-      })
-    );
+    let drawCount = 0;
 
-    if (isFilled === true) {
+    for (let row of gameBoard.board) {
+      for (let col of row) {
+        if (col !== "") {
+          drawCount++;
+        }
+      }
+    }
+
+    if (drawCount === 9) {
       console.log(`Draw`);
     }
   };
@@ -114,7 +115,27 @@ const gameController = function () {
   };
   printRound();
 
-  return { play };
+  return { play, getActivePlayer };
 };
 
+const board = document.querySelector(".board");
+const rows = 3;
+const cols = 3;
+
+for (row = 0; row < rows; row++) {
+  for (col = 0; col < cols; col++) {
+    const box = document.createElement("button");
+    box.classList.add("box");
+    box.dataset.row = row;
+    box.dataset.col = col;
+    board.appendChild(box);
+  }
+}
+
+board.addEventListener("click", (e) => {
+  const row = e.target.dataset.row;
+  const col = e.target.dataset.col;
+  e.target.textContent = game.getActivePlayer().symbol;
+  game.play(row, col);
+});
 const game = gameController();
