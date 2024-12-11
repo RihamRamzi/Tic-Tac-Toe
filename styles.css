@@ -10,6 +10,7 @@ body {
   background-color: rgba(34, 34, 34, 0.747);
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -29,4 +30,60 @@ body {
   background-color: black;
   color: white;
   font-size: 4rem;
+}
+
+.playBtn {
+  height: 10%;
+  width: 50%;
+  font-size: 3rem;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  letter-spacing: 10px;
+  border: none;
+  border-radius: 20px;
+  background-color: lightgrey;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+.playBtn:hover,
+.reset:hover {
+  background-color: rgba(211, 211, 211, 0.87);
+}
+
+.playerName {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 10px;
+}
+
+.playerName label {
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+}
+.playerName input {
+  width: 50%;
+  height: 80%;
+  margin-left: 20px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+.reset {
+  height: 5%;
+  width: 15%;
+  border: none;
+  border-radius: 10px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 2rem;
+  background-color: lightgrey;
+  cursor: pointer;
+  margin-top: 20px;
 }
