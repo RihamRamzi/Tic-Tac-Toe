@@ -14,6 +14,8 @@ const gameBoard = (function () {
   return { placeSymbol, displayBoard, board };
 })();
 
+let win = false;
+
 const gameController = function () {
   const players = [
     {
@@ -37,8 +39,6 @@ const gameController = function () {
     console.log(`${activePlayer.name}'s turn`);
     console.log(gameBoard.displayBoard());
   };
-
-  let win = false;
 
   const play = function (row, col, symbol = activePlayer.symbol) {
     //checks is cell is empty to place symbol
@@ -114,6 +114,18 @@ const gameController = function () {
       }
     }
   };
+
+  playBtn.addEventListener("click", () => {
+    players[0].name = player1.value;
+    players[1].name = player2.value;
+    board.style.display = "grid";
+    resetBtn.style.display = "block";
+    playBtn.style.display = "none";
+    playerNameBox.style.display = "none";
+    playerTurn.style.display = "block";
+    playerTurn.textContent = `${game.getActivePlayer().name}'s Turn`;
+  });
+
   printRound();
 
   return { play, getActivePlayer, drawCheck };
@@ -140,7 +152,20 @@ board.addEventListener("click", (e) => {
   e.target.textContent = game.getActivePlayer().symbol;
   e.target.disabled = true;
   game.play(row, col);
+  playerTurn.textContent = `${game.getActivePlayer().name}'s Turn`;
+  if (win === true) {
+    playerTurn.textContent = `${game.getActivePlayer().name} WON`;
+  }
   if (drawCount === 8) {
+    playerTurn.textContent = `Draw`;
   }
 });
+
+const playBtn = document.querySelector(".playBtn");
+const player1 = document.querySelector("#player1");
+const player2 = document.querySelector("#player2");
+const resetBtn = document.querySelector(".reset");
+const playerNameBox = document.querySelector(".playerName");
+const playerTurn = document.querySelector(".playerTurn");
+
 const game = gameController();

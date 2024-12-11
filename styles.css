@@ -19,7 +19,7 @@ body {
   height: 50%;
   width: 50%;
   background-color: black;
-  display: grid;
+  display: none;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
 }
@@ -86,4 +86,12 @@ body {
   background-color: lightgrey;
   cursor: pointer;
   margin-top: 20px;
+  display: none;
+}
+.playerTurn {
+  color: rgba(255, 255, 255, 0.664);
+  font-size: 3rem;
+  font-family: "Courier New", Courier, monospace;
+  padding-bottom: 30px;
+  display: none;
 }
