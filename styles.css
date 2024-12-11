@@ -16,7 +16,7 @@ body {
 }
 
 .board {
-  height: 50%;
+  height: 70%;
   width: 50%;
   background-color: black;
   display: none;
