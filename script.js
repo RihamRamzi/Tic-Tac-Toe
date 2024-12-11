@@ -136,6 +136,7 @@ board.addEventListener("click", (e) => {
   const row = e.target.dataset.row;
   const col = e.target.dataset.col;
   e.target.textContent = game.getActivePlayer().symbol;
+  e.target.disabled = true;
   game.play(row, col);
 });
 const game = gameController();
