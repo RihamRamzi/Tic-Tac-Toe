@@ -73,6 +73,7 @@ const gameController = function () {
     if (drawCount === 9) {
       console.log(`Draw`);
     }
+    return { drawCount };
   };
 
   const winCheck = function () {
@@ -115,7 +116,7 @@ const gameController = function () {
   };
   printRound();
 
-  return { play, getActivePlayer };
+  return { play, getActivePlayer, drawCheck };
 };
 
 const board = document.querySelector(".board");
@@ -133,10 +134,13 @@ for (row = 0; row < rows; row++) {
 }
 
 board.addEventListener("click", (e) => {
+  let drawCount = game.drawCheck().drawCount;
   const row = e.target.dataset.row;
   const col = e.target.dataset.col;
   e.target.textContent = game.getActivePlayer().symbol;
   e.target.disabled = true;
   game.play(row, col);
+  if (drawCount === 8) {
+  }
 });
 const game = gameController();
