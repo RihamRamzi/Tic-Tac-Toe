@@ -168,8 +168,7 @@ board.addEventListener("click", (e) => {
     playerTurn.textContent = `${game.getActivePlayer().name} WON`;
     const buttons = document.querySelectorAll(".board button");
     buttons.forEach((button) => (button.disabled = true));
-  }
-  if (drawCount === 8) {
+  } else if (drawCount === 8) {
     playerTurn.textContent = `Draw`;
   }
 });
