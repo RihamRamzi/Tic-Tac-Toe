@@ -126,9 +126,20 @@ const gameController = function () {
     playerTurn.textContent = `${game.getActivePlayer().name}'s Turn`;
   });
 
+  const reset = function () {
+    gameBoard.board.forEach((row, i) =>
+      row.forEach((col, j) => {
+        gameBoard.board[i][j] = "";
+      })
+    );
+    switchPlayer();
+    playerTurn.textContent = `${activePlayer.name}'s Turn`;
+    win = false;
+  };
+
   printRound();
 
-  return { play, getActivePlayer, drawCheck };
+  return { play, getActivePlayer, drawCheck, reset };
 };
 
 const board = document.querySelector(".board");
@@ -155,16 +166,27 @@ board.addEventListener("click", (e) => {
   playerTurn.textContent = `${game.getActivePlayer().name}'s Turn`;
   if (win === true) {
     playerTurn.textContent = `${game.getActivePlayer().name} WON`;
+    const buttons = document.querySelectorAll(".board button");
+    buttons.forEach((button) => (button.disabled = true));
   }
   if (drawCount === 8) {
     playerTurn.textContent = `Draw`;
   }
 });
+const resetBtn = document.querySelector(".reset");
+
+resetBtn.addEventListener("click", () => {
+  const buttons = document.querySelectorAll(".board button");
+  buttons.forEach((button) => {
+    button.textContent = "";
+    button.disabled = false;
+  });
+  game.reset();
+});
 
 const playBtn = document.querySelector(".playBtn");
 const player1 = document.querySelector("#player1");
 const player2 = document.querySelector("#player2");
-const resetBtn = document.querySelector(".reset");
 const playerNameBox = document.querySelector(".playerName");
 const playerTurn = document.querySelector(".playerTurn");
 

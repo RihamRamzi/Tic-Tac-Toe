@@ -53,6 +53,7 @@ body {
 .playerName {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 50%;
   gap: 10px;
 }
@@ -64,16 +65,17 @@ body {
   display: flex;
   align-items: center;
   font-family: inherit;
+  width: 70%;
 }
 .playerName input {
-  width: 50%;
+  width: 100%;
   height: 80%;
   margin-left: 20px;
   border-radius: 10px;
   border: none;
   outline: none;
   padding: 10px;
-  font-size: 1rem;
+  font-size: 2rem;
   font-family: inherit;
 }
 .reset {
